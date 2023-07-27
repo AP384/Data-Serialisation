@@ -1,0 +1,11 @@
+DATA SERIALIZATION AND FORMAT
+Link concept of HTTP to Data Serialisation
+send data and how to intepret it
+content type
+95% Get and POst; 99% with PUT
+Network and Port - read up
+servers contin many services ; diffetrntiated by port
+Query string
+URLs / APIs
+<form>
+"" means same server as you are

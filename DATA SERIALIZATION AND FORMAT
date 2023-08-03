@@ -1,11 +1,241 @@
 DATA SERIALIZATION AND FORMAT
+
+NODE
+Any device connected to a network
+SWITCH
+A switch on the network knows where the node with this address is and routes the message to it accordingly.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+PROTOCOLS
+
+* IP *
+When connected to a network each device is given a unique IP address. This address consists of four sets of up to three digits, each with a maximum value of 255, which are separated by dots. An example is:
+
+     192.168.0.254
+
+* MAC *
+A MAC address is a unique serial number assigned to each network interface controller (NIC). This allows a network to uniquely identify any device, even when a dynamic IP address is assigned using DHCP, each time the device connects to a network. The device’s IP address changes depending on the network and the MAC address is unique to the device.
+
+A MAC address consists of a string of hexadecimal numbers. An example is:
+
+     1A:5B:6H:98:78:35
+
+The MAC address is assigned by the NIC’s manufacturer and cannot be easily changed, so is referred to as a physical address. If a device has more than one NIC, for example a wired NIC and a wireless NIC, each NIC will have its own MAC address.
+
+TCP/IP - Transmission Control Protocol/Internet Protocol - enables communication over the internet.
+HTTP and HTTPS - Hypertext Transfer Protocol - governs communication between a webserver and a client. HTTPS (secure) includes secure encryption to allow transactions to be made over the internet.
+FTP - File Transfer Protocol - governs the transmission of files across a network and the internet.
+UDP - User Datagram Protocol - similar to TCP, but because messages are sent instead of packets -chunks - it is often faster, allowing for gaming or video calls over the internet.
+SMTP - Simple Mail Transfer Protocol - governs the sending of emails over a network to a mail server.
+IMAP - Internet Message Access Protocol - governs retrieving emails from email servers.
+
+TCP - transmission control protocol
+When it comes to sending a byte stream over a computer network, a reliable bi-directional transport layer protocol, such as the transmission control protocol (TCP) used on the Internet, is required. These are referred to as a byte stream protocol. Other serial data protocols used with certain types of hardware components, such as the universal asynchronous receiver/transmitter (UART) technique, is a serial data channel that also uses a byte stream for communication. In this case, the byte, or character, is packaged up in a frame on the transmitting end, where an extra starting bit and some optional checking bits are attached and then separated back out of the frame on the receiving end. This technique is sometimes referred to as a byte-oriented protocol.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+NETWORK LAYERING
+In networking, layering means to break up the sending of messages into separate components and activities. Each component handles a different part of the communication. This can be referred to as the Transmission Control Protocol/Internet Protocol - TCP/IP - model.
+
+Layering enables standards to be put in place and simply adapted as new hardware and software is developed.
+There are four layers to be considered:
+
+Application layer - applications such as web browsers and email programs operate at this layer. Protocols such as HTTP, HTTPS, SMTP, IMAP and FTP operate at this layer.
+Transport layer - this breaks down the message into small chunks (packets). Each packet is given a packet number and the total number of packets. This layer sets up the communication between hosts, using protocols such as TCP and UDP.
+Internet layer - this adds the sender’s and recipient’s IP addresses to the packet, and packages the data to make it ready for transmission. The internet layer also routes the packets across the network.
+Link layer - the network interface card/controller (NIC) and operating system drivers are at this layer.
+
+Layering allows standards to be developed, but also to be adapted to new hardware and software over time. For example, different software packages - applications - may use the same transport, network and link layers but have their own application layer. The way the program encodes the message changes - the rest of the communication method remains the same.
+
+-------------------------------------------------------------------------------------------------------
+
+LAYERS
+
+OSI - https://en.wikipedia.org/wiki/OSI_model#Layer_architecture / https://www.geeksforgeeks.org/layers-of-osi-model/
+
+Layer No	Layer Name	       Responsibility	                                     Information Form(Data Unit)	Device or Protocol
+7	-- Application Layer	-- Helps in identifying the client and synchronizing communication -- Message -- SMTP 
+6	-- Presentation Layer	 --  Data from the application layer is extracted and manipulated in the required format for transmission -- Message -- 	JPEG, MPEG, GIF
+5	 -- Session Layer	 --  Establishes Connection, Maintenance, Ensures Authentication, and Ensures security -- Message	-- Gateway
+4	-- Transport Layer	--  Take Service from Network Layer and provide it to the Application Layer -- Segment -- Firewall
+3	-- Network Layer	--  Transmission of data from one host to another, located in different networks -- Packet -- Router
+2	-- Data Link Layer	--  Node to Node Delivery of Message -- Frame	-- Switch, Bridge
+1	-- Physical Layer	 --  Establishing Physical Connections between Devices -- Bits -- Hub, Repeater, Modem, Cables
+
+OSI model acts as a reference model and is not implemented on the Internet because of its late invention. The current model being used is the TCP/IP model. 
+
+Layers of TCP/IP Model
+1. Application Layer (OSI 5-7)
+2. Transport Layer(TCP/UDP) (OSI 4)
+3. Network/Internet Layer(IP) (OSI 3)
+4. Data Link Layer (MAC) (OSI 2)
+5. Physical Layer (OSI 1)
+
+1. Physical Layer
+It is a group of applications requiring network communications. This layer is responsible for generating the data and requesting connections. It acts on behalf of the sender and the Network Access layer on the behalf of the receiver. During this article, we will be talking on the behalf of the receiver.
+
+2. Data Link Layer
+The packet’s network protocol type, in this case, TCP/IP, is identified by the data-link layer. Error prevention and “framing” are also provided by the data-link layer. Point-to-Point Protocol (PPP) framing and Ethernet IEEE 802.2 framing are two examples of data-link layer protocols.
+
+3. Internet Layer
+This layer parallels the functions of OSI’s Network layer. It defines the protocols which are responsible for the logical transmission of data over the entire network. The main protocols residing at this layer are as follows:
+
+IP: IP stands for Internet Protocol and it is responsible for delivering packets from the source host to the destination host by looking at the IP addresses in the packet headers. IP has 2 versions: IPv4 and IPv6. IPv4 is the one that most websites are using currently. But IPv6 is growing as the number of IPv4 addresses is limited in number when compared to the number of users.
+
+The Internet Layer is a layer in the Internet Protocol (IP) suite, which is the set of protocols that define the Internet. The Internet Layer is responsible for routing packets of data from one device to another across a network. It does this by assigning each device a unique IP address, which is used to identify the device and determine the route that packets should take to reach it.
+
+4. Transport Layer
+The TCP/IP transport layer protocols exchange data receipt acknowledgments and retransmit missing packets to ensure that packets arrive in order and without error. End-to-end communication is referred to as such. Transmission Control Protocol (TCP) and User Datagram Protocol are transport layer protocols at this level (UDP).
+
+TCP: Applications can interact with one another using TCP as though they were physically connected by a circuit. TCP transmits data in a way that resembles character-by-character transmission rather than separate packets. A starting point that establishes the connection, the whole transmission in byte order, and an ending point that closes the connection make up this transmission.
+UDP: The datagram delivery service is provided by UDP, the other transport layer protocol. Connections between receiving and sending hosts are not verified by UDP. Applications that transport little amounts of data use UDP rather than TCP because it eliminates the processes of establishing and validating connections.
+
+5. Application Layer
+This layer is analogous to the transport layer of the OSI model. It is responsible for end-to-end communication and error-free delivery of data. It shields the upper-layer applications from the complexities of data. The three main protocols present in this layer are:
+
+HTTP and HTTPS: HTTP stands for Hypertext transfer protocol. It is used by the World Wide Web to manage communications between web browsers and servers. HTTPS stands for HTTP-Secure. It is a combination of HTTP with SSL(Secure Socket Layer). It is efficient in cases where the browser needs to fill out forms, sign in, authenticate, and carry out bank transactions.
+SSH: SSH stands for Secure Shell. It is a terminal emulations software similar to Telnet. The reason SSH is preferred is because of its ability to maintain the encrypted connection. It sets up a secure session over a TCP/IP connection.
+NTP: NTP stands for Network Time Protocol. It is used to synchronize the clocks on our computer to one standard time source. It is very useful in situations like bank transactions. Assume the following situation without the presence of NTP. Suppose you carry out a transaction, where your computer reads the time at 2:30 PM while the server records it at 2:28 PM. The server can crash very badly if it’s out of sync.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+HTTP
 Link concept of HTTP to Data Serialisation
-send data and how to intepret it
-content type
-95% Get and POst; 99% with PUT
-Network and Port - read up
-servers contin many services ; diffetrntiated by port
-Query string
-URLs / APIs
-<form>
-"" means same server as you are
+ - HTTP is an application (layer) protocol that governs how information travels on the World Wide Web, whereas HTML governs how Web pages are formatted and displayed. HTTP protocol determines how Web data is moved around the internet, whereas HTML is the language used to create Web pages.
+
+What is HTTP?
+HTTP stands for Hypertext Transfer Protocol and is used to structure requests and responses over the internet. HTTP requires data to be transferred from one point to another over the network.
+
+The transfer of resources happens using TCP (Transmission Control Protocol). In viewing this webpage, TCP manages the channels between your browser and the server (in this case, codecademy.com). TCP is used to manage many types of internet connections in which one computer or device wants to send something to another. HTTP is the command language that the devices on both sides of the connection must follow in order to communicate.
+
+When you type an address such as www.codecademy.com into your browser, you are commanding it to open a TCP channel to the server that responds to that URL (or Uniform Resource Locator, which you can read more about on Wikipedia). A URL is like your home address or phone number because it describes how to reach you.
+
+In this situation, your computer, which is making the request, is called the client. The URL you are requesting is the address that belongs to the server. Once the TCP connection is established, the client sends a HTTP GET request to the server to retrieve the webpage it should display. After the server has sent the response, it closes the TCP connection. If you open the website in your browser again, or if your browser automatically requests something from the server, a new connection is opened which follows the same process described above
+
+After you type the URL into your browser, your browser will extract the http part and recognize that it is the name of the network protocol to use. Then, it takes the domain name from the URL, in this case “codecademy.com”, and asks the internet Domain Name Server to return an Internet Protocol (IP) address.
+
+Now the client knows the destination’s IP address. It then opens a connection to the server at that address, using the http protocol as specified. It will initiate a GET request to the server which contains the IP address of the host and optionally a data payload. he GET request contains the following text:
+
+GET / HTTP/1.1
+Host: www.codecademy.com
+This identifies the type of request, the path on www.codecademy.com (in this case, “/“) and the protocol “HTTP/1.1.
+
+The second line of the request contains the address of the server which is "www.codecademy.com". There may be additional lines as well depending on what data your browser chooses to send.
+
+If the server is able to locate the path requested, the server might respond with the header:
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+This header is followed by the content requested, which in this case is the information needed to render www.codecademy.com.
+
+The first line of the header, HTTP/1.1 200 OK, is confirmation that the server understands the protocol that the client wants to communicate with (HTTP/1.1), and an HTTP status code signifying that the resource was found on the server. The second line, Content-Type: text/html, shows the type of content that it will be sending to the client.
+
+If the server is not able to locate the path requested by the client, it will respond with the header:
+
+HTTP/1.1 404 NOT FOUND
+In this case, the server identifies that it understands the HTTP protocol, but the 404 NOT FOUND status code signifies that the specific piece of content requested was not found. This might happen if the content was moved or if you typed in the URL path incorrectly or if the page was removed. You can read more about the 404 status code, commonly called a 404 error,
+
+METHODS
+
+GET -- The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
+HEAD -- The HEAD method asks for a response identical to a GET request, but without the response body.
+POST -- The POST method submits an entity to the specified resource, often causing a change in state or side effects on the server.
+PUT -- The PUT method replaces all current representations of the target resource with the request payload.
+DELETE -- The DELETE method deletes the specified resource.
+CONNECT -- The CONNECT method establishes a tunnel to the server identified by the target resource.
+OPTIONS -- The OPTIONS method describes the communication options for the target resource.
+TRACE -- The TRACE method performs a message loop-back test along the path to the target resource.
+PATCH -- The PATCH method applies partial modifications to a resource.
+
+HTTP Status Codes -- https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
+
+-----------------------------------------------------------------------------------------------------------------------------------
+PORT - https://www.cloudflare.com/en-gb/learning/network-layer/what-is-a-computer-port/
+
+What is a port?
+A port is a virtual point where network connections start and end. Ports are software-based and managed by a computer's operating system. Each port is associated with a specific process or service. Ports allow computers to easily differentiate between different kinds of traffic: emails go to a different port than webpages, for instance, even though both reach a computer over the same Internet connection.
+
+How do ports make network connections more efficient?
+Vastly different types of data flow to and from a computer over the same network connection. The use of ports helps computers understand what to do with the data they receive.
+
+Ports are a transport layer (layer 4) concept. Only a transport protocol such as the Transmission Control Protocol (TCP) or User Datagram Protocol (UDP) can indicate which port a packet should go to. TCP and UDP headers have a section for indicating port numbers. Network layer protocols — for instance, the Internet Protocol (IP) — are unaware of what port is in use in a given network connection. In a standard IP header, there is no place to indicate which port the data packet should go to
+
+What are the different port numbers?
+There are 65,535 possible port numbers, although not all are in common use. Some of the most commonly used ports, along with their associated networking protocol, are:
+
+Ports 20 and 21: File Transfer Protocol (FTP). FTP is for transferring files between a client and a server.
+Port 22: Secure Shell (SSH). SSH is one of many tunneling protocols that create secure network connections.
+Port 25: Historically, Simple Mail Transfer Protocol (SMTP). SMTP is used for email.
+Port 53: Domain Name System (DNS). DNS is an essential process for the modern Internet; it matches human-readable domain names to machine-readable IP addresses, enabling users to load websites and applications without memorizing a long list of IP addresses.
+Port 80: Hypertext Transfer Protocol (HTTP). HTTP is the protocol that makes the World Wide Web possible.
+Port 123: Network Time Protocol (NTP). NTP allows computer clocks to sync with each other, a process that is essential for encryption.
+Port 179: Border Gateway Protocol (BGP). BGP is essential for establishing efficient routes between the large networks that make up the Internet (these large networks are called autonomous systems). Autonomous systems use BGP to broadcast which IP addresses they control.
+Port 443: HTTP Secure (HTTPS). HTTPS is the secure and encrypted version of HTTP. All HTTPS web traffic goes to port 443. Network services that use HTTPS for encryption, such as DNS over HTTPS, also connect at this port.
+Port 500: Internet Security Association and Key Management Protocol (ISAKMP), which is part of the process of setting up secure IPsec connections.
+Port 587: Modern, secure SMTP that uses encryption.
+Port 3389: Remote Desktop Protocol (RDP). RDP enables users to remotely connect to their desktop computers from another device.
+
+The Internet Assigned Numbers Authority (IANA) maintains the full list of port numbers and protocols assigned to them.etwork and Port 
+--------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+
+BYTE STREAM
+ - A byte stream treats a file as a sequence of bytes. Within the program, the stream is the identical sequence of bytes.
+ - Byte streams are a sequence of bytes used by programs to input and output information.
+ - Byte streams in Java are used to perform input and output operations of 8-bit bytes while the Character stream is used to perform input and output operations for 16-bits Unicode.
+ - Character streams are useful in reading or writing text files which are processed character by character. Byte Streams are useful to read/write data from raw binary files.
+ - The stream method helps to sequentially access a file. Some streams simply pass on the data while some manipulate and transform the data in a useful way. For example, some streams copy the contents of the file to another and do not modify them or some streams perform manipulations on them like adding or filtering data etc. Streams support many kinds of data including bytes, primitive data types, characters and objects.
+ - A byte stream is a term used to represent a computing technique that allows for sending data along a particular path. Here, instead of the individual ones and zeros, known as binary digits or bits, units that are the size of eight bits, known as a byte, are sent along the pathway. It is also sometimes referred to as a character stream, since most of the characters that make up a natural language alphabet, numbers and so forth are represented by such 8-bit units. The path, or entities involved in the transfer of data, are somewhat abstract, as they may represent a file being accessed by a program, data being processed within a program, or data traveling over a network.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+STREAM - It is a sequence of data/objects that supports various methods. They are used to read or write data. Eg- files, input-output devices etc.
+INPUT STREAM READER- It reads data from a source, one item at a time. An InputStreamReader class is a bridge from byte streams to character streams. It reads bytes and decodes them into characters.
+OUTPUT STREAM READER- It writes data to a destination, one item at a time. An OutputStreamWriter class is a bridge from character streams to byte streams. Characters written to it are encoded into bytes.
+UNICODE is an international character encoding standard by which each letter, digit or symbol is assigned a unique numeric value across all platforms.
+NON-UNICODE text are modules or character encodings that do not support Unicode standards. It only supports English language representation.
+-------------------------------------------------------------------------------------------------------------------------------------
+
+ENCODING
+
+ASCII Encoding
+American Standard Code for Information Interchange (ASCII) is a type of character-encoding. It was the first character encoding standard released in the year 1963.
+
+Th ASCII code is used to represent English characters as numbers, where each letter is assigned with a number from 0 to 127. Most modern character-encoding schemes are based on ASCII, though they support many additional characters. It is a single byte encoding only using the bottom 7 bits. In an ASCII file, each alphabetic, numeric, or special character is represented with a 7-bit binary number. Each character of the keyboard has an equivalent ASCII value.
+
+ASCI code for A (in red) is 65 (in blue)	-- see Coode context google sheet				
+
+UTF-8 is capable of encoding all 1,112,064[a] valid character code points in Unicode using one to four one-byte (8-bit) code units. Code points with lower numerical values, which tend to occur more frequently, are encoded using fewer bytes. It was designed for backward compatibility with ASCII: the first 128 characters of Unicode, which correspond one-to-one with ASCII, are encoded using a single byte with the same binary value as ASCII, so that valid ASCII text is valid UTF-8-encoded Unicode as well.
+
+https://www.fileformat.info/info/charset/UTF-8/list.htm
+
+---------------------------------------------------------------------------------------------------------------
+
+MIME - multipurpose Internet mail extensions
+In early computer networking, some systems made a distinction between a byte and what's also called an octet. Since an octet is also a computing unit comprised of eight bits, the terms are sometimes used interchangeably, though on those older systems, they are not the same thing. As a result, however, the octet stream is a term also used when speaking of a byte stream, though primarily with regards to computer networking. One such example, "application/octet-stream," is the multipurpose Internet mail extensions (MIME) type for delivering any sort of binary data over a network.
+
+MIME (Multipurpose Internet Mail Extensions) is a standard that extends the format of email messages to support text in character sets other than ASCII, as well as attachments of audio, video, images, and application programs.
+
+Message bodies may consist of multiple parts, and header information may be specified in non-ASCII character sets.
+
+MIME was designed mainly for Mail, its content types are also important in other communication protocols HTTP.
+
+MIME header field is inserted at the beginning of any Web transmission (eg. content-type: text/html). Clients use the content type or media type header to select an appropriate viewer application for the type of data indicated.
+
+Browsers use the MIME type, not the file extension, to determine how to process a URL, so it's important that web servers send the correct MIME type in the response's Content-Type header. If this is not correctly configured, browsers are likely to misinterpret the contents of files, sites will not work correctly, and downloaded files may be mishandled.
+
+A MIME type most commonly consists of just two parts: a type and a subtype, separated by a slash (/) — with no whitespace between:
+
+type/subtype
+The type represents the general category into which the data type falls, such as video or text.
+
+The subtype identifies the exact kind of data of the specified type the MIME type represents. For example, for the MIME type text, the subtype might be plain (plain text), html (HTML source code), or calendar (for iCalendar/.ics) files.
+
+For example, for any MIME type whose main type is text, you can add the optional charset parameter to specify the character set used for the characters in the data. If no charset is specified, the default is ASCII (US-ASCII) unless overridden by the user agent's settings. To specify a UTF-8 text file, the MIME type text/plain;charset=UTF-8 is used.
+
+MIME types are case-insensitive but are traditionally written in lowercase. The parameter values can be case-sensitive.
+
+There are two classes of type: discrete and multipart. Discrete types are types which represent a single file or medium, such as a single text or music file, or a single video. A multipart type represents a document that's comprised of multiple component parts, each of which may have its own individual MIME type; or, a multipart type may encapsulate multiple files being sent together in one transaction. For example, multipart MIME types are used when attaching multiple files to an email.
+-------------------------------------------------------------------------------------------------------
+
+
+
